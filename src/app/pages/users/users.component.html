@@ -4,18 +4,18 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-3" >
+    <div class="col-3" *ngFor="let user of userList">
         <div class="card">
             <div class="card-header bg-success">
-                Email Id
+                {{user.emailId}}
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        Full Name
+                        {{ user.fullName }}
                     </div>
                     <div class="col-6">
-                        Password
+                        {{ user.userId }}
                     </div>
                 </div>
               
@@ -44,24 +44,24 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-6">
-                <label for="">EmailId</label>
-                <input type="text" name="emailId" class="form-control" >
+                <label for="">Email</label>
+                <input type="text" name="emailId" [(ngModel)] = 'userObj.emailId' class="form-control" >
             </div>
             <div class="col-6">
                 <label for="">Password</label>
-                <input type="text" name="password" class="form-control" >
+                <input type="text" name="password" [(ngModel)] = 'userObj.password' class="form-control" >
             </div>
           </div>
           <div class="row"> 
             <div class="col-8">
                 <label for="">Full  Name</label>
-                <input type="text" name="projectName" class="form-control">
+                <input type="text" name="fullName" [(ngModel)] = 'userObj.fullName' class="form-control">
             </div>
           </div>
         </div> 
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" >Save</button>
+          <button type="button" class="btn btn-danger" (click)="onSave()">Save</button>
         </div> 
       </div>
     </div>
