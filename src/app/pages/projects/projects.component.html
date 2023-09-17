@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col-12 text-end">
-        <button class="btn btn-success btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal">Create New Project</button>
+        <button class="btn btn-primary text-light btn-sm"  data-bs-toggle="modal" data-bs-target="#myModal">Create New Project</button>
     </div>
 </div>
 <div class="row">
-    <div class="col-3">
-        <div class="card">
-            <div class="card-header bg-success">
-                Short name
+    <div class="col-3" *ngFor="let project of projectList">
+        <div class="card mb-3 shadow">
+            <div class="card-header bg-primary text-light">
+                {{project.shortName}}
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        Project Name
+                        {{project.projectName}}
                     </div>
                     <div class="col-6">
-                        Date
+                        {{project.createdDate | date:"dd-MMM-yy"}}
                     </div>
                 </div>
               
@@ -23,7 +23,7 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col-6">
-                        <button class="btn btn-success btn-sm">Edit</button>
+                        <button class="btn btn-primary text-light btn-sm">Edit</button>
                     </div>
                     <div class="col-6">
                         <button class="btn btn-danger btn-sm">Delete</button>
@@ -45,17 +45,17 @@
           <div class="row">
             <div class="col-3">
                 <label for="">Short Name</label>
-                <input type="text" name="shortName" class="form-control" >
+                <input type="text" name="shortName" [(ngModel)] = "projectObj.shortName" class="form-control" >
             </div>
             <div class="col-5">
                 <label for="">Full  Name</label>
-                <input type="text" name="projectName" class="form-control" >
+                <input type="text" name="projectName" [(ngModel)] = "projectObj.projectName" class="form-control" >
             </div>
           </div>
         </div> 
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" >Save</button>
+          <button type="button" class="btn btn-primary" (click)="onSave()">Save</button>
         </div> 
       </div>
     </div>
