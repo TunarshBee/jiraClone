@@ -8,24 +8,29 @@ import { JiraService } from 'src/app/services/jira.service';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-    ticketArray: any []=[];
- constructor(private http: HttpClient, private jiraservice : JiraService){
-  this.jiraservice.onProjectChange.subscribe((res:any)=>{
-      this.getProjectTicket(res.projectId);
-  })
- }
-  ngOnInit(): void {
-    
-  } 
+  ticketArray: any[] = [];
+  statuses: string[] = ['TO-DO', 'In Progress', 'Done']
 
-  getProjectTicket(id: any){
-    this.http.get(`https://freeapi.miniprojectideas.com/api/Jira/GetTicketsByProjectId?projectId=${id}`).subscribe((res:any)=>{
+  constructor(private http: HttpClient, private jiraservice: JiraService) {
+    this.jiraservice.onProjectChange.subscribe((res: any) => {
+      this.getProjectTicket(res.projectId);
+    })
+  }
+  ngOnInit(): void {
+
+  }
+
+  getProjectTicket(id: any) {
+    this.http.get(`https://freeapi.miniprojectideas.com/api/Jira/GetTicketsByProjectId?projectId=${id}`).subscribe((res: any) => {
       if (res.result) {
-       this.ticketArray = res.data;
+        this.ticketArray = res.data;
       } else {
-       alert(res.message)
+        alert(res.message)
       }
-     })
+    })
+  }
+  filterTicket(status: string){
+    return this.ticketArray.filter(x => x.status == status)
   }
 
 }

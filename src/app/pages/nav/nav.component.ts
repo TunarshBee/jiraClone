@@ -8,11 +8,11 @@ import { JiraService } from 'src/app/services/jira.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  projectList:any[]=[]
-  userList:any[]=[]
+  projectList: any[] = []
+  userList: any[] = []
   issueType: string[] = ['Ticket', 'Defect', 'RnD work']
   statuses: string[] = ['TO-DO', 'In Progress', 'Done']
-  ticketObj: any ={
+  ticketObj: any = {
     "ticketId": 0,
     "createdDate": new Date(),
     "summary": "",
@@ -26,44 +26,44 @@ export class NavComponent implements OnInit {
     "projectId": 0
   }
 
-  constructor (private http: HttpClient, private jiraservice: JiraService){
+  constructor(private http: HttpClient, private jiraservice: JiraService) {
     const logedInUser = localStorage.getItem('jiraLoginDetails')
     if (logedInUser != null) {
       const parsedDetail = JSON.parse(logedInUser)
       this.ticketObj.createdBy = parsedDetail.data.userId;
       console.log(this.ticketObj);
-      
+
     }
   }
-  
+
   ngOnInit(): void {
     this.getAvailableProducts()
     this.getAvailableUsers()
   }
-getAvailableProducts(){
-    this.http.get('https://freeapi.miniprojectideas.com/api/Jira/GetAllProjects').subscribe((res:any)=>{
+  getAvailableProducts() {
+    this.http.get('https://freeapi.miniprojectideas.com/api/Jira/GetAllProjects').subscribe((res: any) => {
       this.projectList = res.data
       console.log(this.projectList);
-      
+
     })
   }
-  getAvailableUsers(){
-      this.http.get('https://freeapi.miniprojectideas.com/api/Jira/GetAllUsers').subscribe((res:any)=>{
-        this.userList = res.data
-        console.log(this.userList);
-        
-      })
-    }
-    setProject(obj : any){
-      this.jiraservice.onProjectChange.next(obj)
-    }
-    onTicketCreate(){
-      this.http.post('https://freeapi.miniprojectideas.com/api/Jira/CreateTicket', this.ticketObj).subscribe((res:any)=>{
-        if (res.result) {
-         alert(res.message)
-        } else {
-         alert(res.message)
-        }
-       })
-    }
+  getAvailableUsers() {
+    this.http.get('https://freeapi.miniprojectideas.com/api/Jira/GetAllUsers').subscribe((res: any) => {
+      this.userList = res.data
+      console.log(this.userList);
+
+    })
+  }
+  setProject(obj: any) {
+    this.jiraservice.onProjectChange.next(obj)
+  }
+  onTicketCreate() {
+    this.http.post('https://freeapi.miniprojectideas.com/api/Jira/CreateTicket', this.ticketObj).subscribe((res: any) => {
+      if (res.result) {
+        alert(res.message)
+      } else {
+        alert(res.message)
+      }
+    })
+  }
 }
