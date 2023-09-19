@@ -10,10 +10,12 @@ import { JiraService } from 'src/app/services/jira.service';
 export class BoardComponent implements OnInit {
   ticketArray: any[] = [];
   statuses: string[] = ['TO-DO', 'In Progress', 'Done']
+  selectedProjectData: any;
 
   constructor(private http: HttpClient, private jiraservice: JiraService) {
     this.jiraservice.onProjectChange.subscribe((res: any) => {
       this.getProjectTicket(res.projectId);
+      this.selectedProjectData = res;
     })
   }
   ngOnInit(): void {

@@ -24,13 +24,13 @@
                 <div class="card-header border-0 py-1"> {{status}} <span>  </span><!----></div>
                 <div class="card-body ticket-bg border" id="3"><!---->
                     <div draggable="true" *ngFor="let ticket of filterTicket(status)" class="card-Body-Hover m-1 rounded-1 task" >
-                        <div class="my-1 fw-bold"> ticket Summary </div>
+                        <div class="my-1 fw-bold"> {{ticket.summary}} </div>
                         <div class="row">
                             <div class="col-3">
                                 <p class="text-muted space-font m-0 pointer"></p>
                             </div>
                             <div class="col-9 text-end">
-                                <p class="text-muted space-font m-0">ticket Assign to
+                                <p class="text-muted space-font m-0">{{ticket.assignedTo}}
                                 </p>
                             </div>
                         </div>
