@@ -37,14 +37,14 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAvailableProducts()
+    this.getAvailableProjects()
     this.getAvailableUsers()
   }
-  getAvailableProducts() {
+  getAvailableProjects() {
     this.http.get('https://freeapi.miniprojectideas.com/api/Jira/GetAllProjects').subscribe((res: any) => {
       this.projectList = res.data
       console.log(this.projectList);
-
+      this.jiraservice.onProjectChange.next(this.projectList[0])
     })
   }
   getAvailableUsers() {
@@ -61,6 +61,7 @@ export class NavComponent implements OnInit {
     this.http.post('https://freeapi.miniprojectideas.com/api/Jira/CreateTicket', this.ticketObj).subscribe((res: any) => {
       if (res.result) {
         alert(res.message)
+        this.jiraservice.onTicketCreate.next(true)
       } else {
         alert(res.message)
       }

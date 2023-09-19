@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class JiraService {
   public onProjectChange = new Subject()
+  public onTicketCreate = new Subject()
 
   constructor() { }
 }

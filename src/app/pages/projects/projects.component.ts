@@ -18,10 +18,10 @@ projectObj: any ={
 
   }
   ngOnInit(): void {
-    this.getAvailableProducts()
+    this.getAvailableProjects()
   }
 
-  getAvailableProducts(){
+  getAvailableProjects(){
     this.http.get('https://freeapi.miniprojectideas.com/api/Jira/GetAllProjects').subscribe((res:any)=>{
       this.projectList = res.data
       console.log(this.projectList);
@@ -32,7 +32,7 @@ projectObj: any ={
     this.http.post('https://freeapi.miniprojectideas.com/api/Jira/CreateProject', this.projectObj).subscribe((res:any)=>{
      if (res.result) {
       alert(res.message)
-      this.getAvailableProducts()
+      this.getAvailableProjects()
      } else {
       alert(res.message)
      }

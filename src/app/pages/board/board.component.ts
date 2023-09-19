@@ -17,6 +17,9 @@ export class BoardComponent implements OnInit {
       this.getProjectTicket(res.projectId);
       this.selectedProjectData = res;
     })
+    this.jiraservice.onTicketCreate.subscribe((res: any) => {
+      this.getProjectTicket(this.selectedProjectData.projectId);
+    })
   }
   ngOnInit(): void {
 
